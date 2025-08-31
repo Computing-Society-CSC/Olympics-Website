@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block css_style %}
+<style>
+    .match-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--padding);
+    }
+
+    .section-header {
+        font-size: 2rem;
+        margin-bottom: 0.5em;
+        border-bottom: 3px solid var(--accent-color);
+        padding-bottom: 0.3em;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .top-players {
+        display: flex;
+        justify-content: center;
+        gap: 1em;
+        margin-bottom: 2em;
+    }
+
+    .player-card {
+        flex: 1 1 30%;
+        border-radius: 10px;
+        padding: 1.5em;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .player-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Specific Colors for Ranks */
+    .rank-1 { background: linear-gradient(135deg, #ffd700, #ffcc00); color: #5a4100; }
+    .rank-2 { background: linear-gradient(135deg, #c0c0c0, #b0b0b0); color: #333; }
+    .rank-3 { background: linear-gradient(135deg, #cd7f32, #b87333); color: #4d2c1d; }
+    
+    .rounds {
+        margin-bottom: 2em;
+    }
+
+    .round {
+        margin-bottom: 1.5em;
+        padding: 1em;
+        border-radius: 10px;
+        background: var(--light-background);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .round-header {
+        font-size: 1.5rem;
+        margin-bottom: 0.5em;
+        text-align: center;
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+
+    .match {
+        border-radius: 8px;
+        padding: 1em;
+        margin-bottom: 0.8em;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .match-score {
+        font-weight: bold;
+        color: var(--accent-color);
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+        .top-players {
+            flex-direction: column;
+            align-items: center;
+        }
+        .player-card {
+            flex: 1 1 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="match-container">
+    <h2 class="section-header">Top 3 Players</h2>
+    <div class="top-players">
+        {% for player in manual_3places %}
+            {% if player %}
+                <div class="player-card rank-{{ loop.index }}">
+                    <h3>🏆 Rank {{ loop.index }}</h3>
+                    <p><strong> {{ player.name }} </strong></p>
+                    {% if player.team %}
+                        <p><strong>Team:</strong> {{ player.team }}</p>
+                    {% endif %}
+                    {% if player.stats %}
+                        <p><strong>Stats:</strong> {{ player.stats }}</p>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="player-card rank-{{ loop.index }}">
+                    <h3>🏆 Rank {{ loop.index }}</h3>
+                    <p>No data available</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <h2 class="section-header">Rounds</h2>
+    <div class="rounds">
+        {% if round_matches_list %}
+            {% for round_matches in round_matches_list %}
+                <div class="round">
+                    <h3 class="round-header">Round {{ loop.index }}</h3>
+                    {% for match in round_matches %}
+                        <div class="match">
+                            {% if match.player1 %}
+                                <p><strong>Player 1:</strong> {{ match.player1.name }}</p>
+                            {% endif %}
+                            {% if match.player2 %}
+                                <p><strong>Player 2:</strong> {{ match.player2.name }}</p>
+                            {% endif %}
+                            <p class="match-score">⚔️ Score: {{ match.score1 }} - {{ match.score2 }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No rounds available.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

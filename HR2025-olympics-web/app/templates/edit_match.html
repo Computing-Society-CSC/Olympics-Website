@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Edit Match Information</h1>
+    <div style="text-align: center; margin: 20px;">
+        <a href="/{{ key }}/management/" class="button">Back to Management Dashboard</a>
+    </div>
+    <!-- Form to edit match details -->
+    <form method="POST" action="{{ url_for('main.edit_match', key=key, match_id=match_info.id) }}">
+        {{ form.hidden_tag() }}
+        
+        <label for="name">Match Name:</label>
+        {{ form.name(class="form-control") }}
+        
+        <label for="start_time">Start Time:</label>
+        {{ form.start_time(class="form-control") }}
+        
+        <label for="end_time">End Time:</label>
+        {{ form.end_time(class="form-control") }}
+        
+        <label for="status">Status:</label>
+        {{ form.status(class="form-control") }}
+        
+        <label for="category">Category:</label>
+        {{ form.category(class="form-control") }}
+        
+        <label for="description">Description:</label>
+        {{ form.description(class="form-control") }}
+        
+        <!-- Save Changes Button -->
+        <input type="submit" value="Save Changes" class="button submit-button">
+        
+        <!-- Delete Button -->
+        <button type="submit" name="delete" class="button danger-button" onclick="return confirm('Are you sure you want to delete this match?')">Delete Match</button>
+    </form>
+
+    <!-- Back Button -->
+    <div class="button-container">
+        <a href="{{ url_for('main.management_matches_all', key=key) }}" class="button">Back to Matches</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block css_style %}
+<style>
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #ffffff;
+        --accent-color: #f4a261;
+        --input-border-color: #ddd;
+    }
+    body {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        text-align: center;
+        padding: 20px;
+        color: var(--primary-color);
+    }
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    form {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin: 10px 0 5px;
+    }
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 15px;
+        border: 1px solid var(--input-border-color);
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .button {
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px;
+        border-radius: 5px;
+    }
+    .button:hover {
+        background-color: darkorange;
+    }
+    .danger-button {
+        background-color: #e74c3c;
+        color: white;
+    }
+    .danger-button:hover {
+        background-color: #c0392b;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}

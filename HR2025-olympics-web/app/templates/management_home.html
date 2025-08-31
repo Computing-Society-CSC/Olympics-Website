@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block css_style %}
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #ffffff;
+        --accent-color: #f4a261;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .card-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background-color: var(--secondary-color);
+        border: 2px solid var(--accent-color);
+        border-radius: 10px;
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h2 {
+        color: var(--primary-color);
+    }
+
+    .card p {
+        font-size: 14px;
+        margin: 10px 0;
+    }
+
+    .button {
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    .button:hover {
+        background-color: darkorange;
+    }
+{% endblock %}
+
+{% block content %}
+        <h1>Management Dashboard</h1>
+        <div class="card-container">
+            <!-- House Rankings Card -->
+            <div class="card">
+                <h2>House Rankings</h2>
+                <p>View real-time rankings: See the current standings of each house based on their accumulated points, displayed in an easy-to-read format.</p>
+                <p>Update house points: Adjust the points for individual houses to reflect their performance in events, competitions, or other activities.</p>
+                <a href="/{{ key }}/management/house_rankings/" class="button">Go to Rankings</a>
+            </div>
+
+            <!-- Manage Players Card -->
+            <div class="card">
+                <h2>Manage Players</h2>
+                <p>Add new players: Register new participants by entering their details, such as name, house affiliation, and medals number.</p>
+                <p>Remove players: Deactivate or remove players who are no longer participating, ensuring the database remains current.</p>
+                <p>Update player profiles: Edit player information, including names, house affiliation (allows to update two house affiliation in soccer game), and medals number.</p>
+                <a href="/{{ key }}/management/players/" class="button">Manage Players</a>
+            </div>
+
+            <!-- Manage Matches Card -->
+            <div class="card">
+                <h2>Manage Matches</h2>
+                <p>Schedule matches: Plan and organize matches by setting dates, times, and participating teams or players.</p>
+                <p>Update scores: Enter match results and scores to keep the system updated and reflect the latest outcomes.</p>
+                <p>Assign winners: Declare winners and update their standings in the overall rankings.</p>
+                <p>Generate matches: Create and manage specific matches from an ordered participants list.</p>
+                <a href="/{{ key }}/management/matches/all/" class="button">Manage Matches</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

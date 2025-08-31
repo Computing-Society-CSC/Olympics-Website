@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "csc-olimpic-site",
+  "private_key_id": "9603cd2c316e4980106e97463c6f82f88e5b8b56",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCg3WpHnPggTXPL\nFcsq1Gp7904wT+jVgkC1Xo2qnEJne6JbMJimRhG82tHfdH+uvcJQcTEuaIuvzluX\nOGOaVyKvUflRs2yPBjnawIK7tM+oej3lOq9vfDGRsvTA/sJ6mEn8TJbZZCRn3ZkW\nRouV1iMt7xYNgwaZgaNYZuBd46M3ELa/8RyEeXLkvXPEHywayT6op6dUDOX81KCv\nv/PmexYz+HU74SNxRHELTO3s+JIDuNlnxhZIzI58WUvdWLSKzgT0mviHPlDndTcz\nHQNjNJBXpKwmi0wYn9dw4Pm/B/cwf02EKpeyGuOWNmi+5K00kAi2zjSCRc2N8mlX\n+Ky1/kObAgMBAAECggEACDX/s0O9XIoSM4GwxZu4YGHUAV5K0FRzhhkbRQ6bIG9s\nmZf7lV0f5v0KV7a5amDFjC1C6ToCi0jkCZjMvgzdjd0IIKtLtWndcR+AwiECtSL2\n3tOl2ccZO/Ufo2w9iVwVnAWyxh+ORijxo/PviF3jnM1xLuO1u1x6dcwxKUmxw+Ex\n7PHp3nije4DHqJWGUhjGXNyltzWHiMUPOs4zPtm8N10LW/++ib1GbLeji2asaTbg\n1J3xaNWyjjPDwPxfDKBDEI3L+VF6Ky6c9+iI6BO58PwOcCmIV/pAN9dpMup3AZSw\nJghEERW7y56FrZG8BuKkxCZxeTR3Gb5W0mZc+qxf/QKBgQDY5RyRjCJUFmume+l6\nF4uGbEv472klseKAj5Zib85UvG2o3+YoVZDua5ph85GStNXWL5YJS1UrTZdRfY48\nYX60Az1OBA2ub0zEp/S5h8hD0l7irdViP1JZLmDnFHneboJBl3kz+MYYByFzyrep\nlfudtssMcd7s9NAqXI13tHyBtQKBgQC93jW1tQu7EOEM8EPCI1mkkf4YCejJXS2J\neipAyTzT9ClPRTsVUgZty8KZAanYrsRy5nKANS78vpF2YcVj63oEY+0348XARxgy\n/DPE5/apJFmC/2pao1fPPsQaf4VXFirh2vuw44A4rI8pn7H8zJx66ICJ6C2cW3Gd\nF/ml9XpCDwKBgG60ytczitYWt427k5lg6TOMlV6TfLzjxfPO1niaDtvLbcGTvtt5\niUdYnu0+MGCMctUnZtKJpAg9S24pwu7o6I4jVSg8A2u0nZ+HBu+n8b1EZHAZQGAs\nZ/DjLkzkc6voBg5KrW+snBfpk9aRcxtZVZvTkGJiwOF7t8DXitG9yws9AoGAFTip\n7iZPKlhnnweXuzIyScebi9pHr4H/nfcOk/EqIFKQ73BAe1CQsWLt3CYocrSN9n21\nXIkVOGCgZ4fkBRgDqkv07qNBrg0EMman7qEym5MZgh/EJl9NaDeOuZt5LtOmdVoB\nebLj2PHIipFz1lqUPtSP0VonBuvdlf5hA+CdCpcCgYEAoBPSERy24ZHkyuPUlN6Z\n1VTuJrFWW5d/7Jp6h+xDXZcef6OhIRsYxVsF+gAFAY6PVb7Zv6QFTD7Z/JGbelXN\nMyMS0tiprAwWoTjG0YEaOP6cENAxf8t4BmW73MPmMPSDjr3WsDEowLoN0jk4KpZA\n98EU8J2zuf3/b02nCQ+778o=\n-----END PRIVATE KEY-----\n",
+  "client_email": "olpk-411@csc-olimpic-site.iam.gserviceaccount.com",
+  "client_id": "103623909633504221756",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/olpk-411%40csc-olimpic-site.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

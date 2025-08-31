@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block css_style %}
+.schedule-container {
+    margin: 20px;
+}
+.day-schedule {
+    margin-bottom: 40px;
+}
+h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+.timetable-container {
+    overflow-x: auto; /* Prevent horizontal scrolling */
+}
+table.timetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+th {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+}
+@media (max-width: 768px) {
+    table.timetable, th, td {
+        font-size: 0.9rem;
+    }
+    th, td {
+        padding: 8px;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+{% endblock %}
+
+{% block content %}
+  <div class="schedule-container">
+
+    <!-- Friday, March 14 -->
+    <div class="day-schedule">
+      <h2>Friday, March 14</h2>
+      <div class="timetable-container">
+        <table class="timetable">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>General</th>
+              <th>Outdoor Field</th>
+              <th>Indoor 3rd</th>
+              <th>Canteen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>16:30</td>
+              <td>Opening Ceremony</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>17:00</td>
+              <td></td>
+              <td>Tug of War</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>18:00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Food Eating</td>
+            </tr>
+            <tr>
+              <td>19:00</td>
+              <td></td>
+              <td></td>
+              <td>Dodgeball Part 1</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Saturday, March 15 -->
+    <div class="day-schedule">
+      <h2>Saturday, March 15</h2>
+      <div class="timetable-container">
+        <table class="timetable">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Indoor 3rd</th>
+              <th>Indoor 4th</th>
+              <th>Outdoor Field</th>
+              <th>Swimming Pool</th>
+              <th>Kuncheng Lake</th>
+              <th>Blackbox</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>09:00</td>
+              <td>Badminton</td>
+              <td>Archery</td>
+              <td>Football</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>13:00</td>
+              <td>Volleyball</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>14:00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Swimming</td>
+              <td>Kayaking</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>18:00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Darts</td>
+            </tr>
+            <tr>
+              <td>19:00</td>
+              <td>Baskteball Round 1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sunday, March 16 -->
+    <div class="day-schedule">
+      <h2>Sunday, March 16</h2>
+      <div class="timetable-container">
+        <table class="timetable">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Indoor 3rd</th>
+              <th>Outdoor Tennis Court</th>
+              <th>Outdoor Field</th>
+              <th>Canteen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>09:00</td>
+              <td></td>
+              <td>Tennis</td>
+              <td>Track and Field</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>10:00</td>
+              <td>Table Tennis</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>13:30</td>
+              <td></td>
+              <td></td>
+              <td>Frisbee</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>14:00</td>
+              <td>Basketball Round 2</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>18:00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Arm Wrestling</td>
+            </tr>
+            <tr>
+              <td>19:00</td>
+              <td>Dodgeball Part 2</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

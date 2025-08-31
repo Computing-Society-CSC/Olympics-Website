@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Submit Match Rankings</h1>
+    <div style="text-align: center; margin: 20px;">
+        <a href="/{{ key }}/management/" class="button">Back to Management Dashboard</a>
+    </div>
+    <div class="match-details">
+        <p><strong>Match ID:</strong> {{ match.id }}</p>
+        <p><strong>Match Name:</strong> {{ match.name }}</p>
+    </div>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label for="first_place">{{ form.first_place.label }}</label>
+            <div class="autocomplete-container">
+                {{ form.first_place(class="form-control", placeholder="Enter first place winner's name", id="first_place") }}
+                <ul class="autocomplete-list" id="first_place_suggestions"></ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="second_place">{{ form.second_place.label }}</label>
+            <div class="autocomplete-container">
+                {{ form.second_place(class="form-control", placeholder="Enter second place winner's name", id="second_place") }}
+                <ul class="autocomplete-list" id="second_place_suggestions"></ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="third_place">{{ form.third_place.label }}</label>
+            <div class="autocomplete-container">
+                {{ form.third_place(class="form-control", placeholder="Enter third place winner's name", id="third_place") }}
+                <ul class="autocomplete-list" id="third_place_suggestions"></ul>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="button submit-button">{{ form.submit.label }}</button>
+        </div>
+    </form>
+
+    <!-- Back to Matches Button -->
+    <div class="button-container">
+        <a href="/{{ key }}/management/matches/all/" class="button back-button">Back to Matches</a>
+    </div>
+</div>
+
+{% block css_style %}
+<style>
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #ffffff;
+        --accent-color: #f4a261;
+        --input-border-color: #ddd;
+        --hover-color: #e76f51;
+    }
+
+    body {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px;
+        font-size: 26px;
+        color: var(--primary-color);
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .match-details {
+        background: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .match-details p {
+        margin: 8px 0;
+        font-size: 16px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .autocomplete-container {
+        position: relative;
+    }
+
+    .autocomplete-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        border: 1px solid var(--input-border-color);
+        position: absolute;
+        width: 100%;
+        background-color: white;
+        z-index: 1000;
+        border-radius: 4px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    .autocomplete-list li {
+        padding: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s ease-in-out;
+    }
+
+    .autocomplete-list li:hover {
+        background-color: var(--accent-color);
+        color: white;
+    }
+
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .button {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: background 0.3s, transform 0.2s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .button:hover {
+        background-color: var(--hover-color);
+        transform: scale(1.05);
+    }
+
+    .submit-button {
+        background: linear-gradient(135deg, var(--accent-color), var(--hover-color));
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .submit-button:hover {
+        background: linear-gradient(135deg, var(--hover-color), var(--accent-color));
+        transform: scale(1.08);
+    }
+
+    .back-button {
+        background-color: #f4a261;
+        color: var(--primary-color);
+        margin-top: 10px;
+    }
+
+    .back-button:hover {
+        background-color: darkorange;
+    }
+</style>
+{% endblock %}
+
+{% block js_script %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function setupAutocomplete(inputId, suggestionListId) {
+            let input = document.getElementById(inputId);
+            let suggestionList = document.getElementById(suggestionListId);
+
+            input.addEventListener("input", function () {
+                let query = this.value;
+                if (query.length < 2) {
+                    suggestionList.innerHTML = "";
+                    return;
+                }
+
+                fetch(`/autocomplete/players?q=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        suggestionList.innerHTML = "";
+                        data.forEach(name => {
+                            let li = document.createElement("li");
+                            li.textContent = name;
+                            li.onclick = function () {
+                                input.value = name;
+                                suggestionList.innerHTML = "";
+                            };
+                            suggestionList.appendChild(li);
+                        });
+                    });
+            });
+
+            document.addEventListener("click", function (event) {
+                if (!input.contains(event.target) && !suggestionList.contains(event.target)) {
+                    suggestionList.innerHTML = "";
+                }
+            });
+        }
+
+        setupAutocomplete("first_place", "first_place_suggestions");
+        setupAutocomplete("second_place", "second_place_suggestions");
+        setupAutocomplete("third_place", "third_place_suggestions");
+    });
+</script>
+{% endblock %}
+
+{% endblock %}

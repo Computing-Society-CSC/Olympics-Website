@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Management - Match Scores{% endblock %}
+
+{% block css_style %}
+<style>
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #ffffff;
+        --accent-color: #f4a261;
+    }
+
+    /* General Body and Container Styling */
+    body {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Table Styling */
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: var(--accent-color);
+        color: var(--secondary-color);
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Button Styling */
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .button {
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    .button:hover {
+        background-color: darkorange;
+    }
+
+    /* Row Highlight on Hover */
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Manage Matches for This Game</h1>
+    <div style="text-align: center; margin: 20px;">
+        <a href="/{{ key }}/management/" class="Button">Back to Management Dashboard</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Round Number</th>
+                <th>Player 1</th>
+                <th>Player 2</th>
+                <th>Score 1</th>
+                <th>Score 2</th>
+                <th>Winner</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in matches %}
+            <tr>
+                <td>{{ match.round_number }}</td>
+                <td>{{ match.player1_name }}</td>
+                <td>{{ match.player2_name }}</td>
+                <td>{{ match.score1 }}</td>
+                <td>{{ match.score2 }}</td>
+                <td>{{ match.winner_name }}</td>
+                <td>
+                    <a href="/{{ key }}/management/matches/all/{{ match.match_id }}/{{ match.match_uni_id }}/" class="button">Upload Match Scores</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="button-container">
+        <a href="{{ url_for('main.management_matches_all', key=key) }}" class="button">Back to All Matches</a>
+    </div>
+</div>
+{% endblock %}

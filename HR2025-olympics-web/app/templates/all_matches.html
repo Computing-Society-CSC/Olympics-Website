@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block css_style %}
+/* Container for the match list */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* Match list grid */
+.match-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Match item card style */
+.match-item {
+  background: linear-gradient(145deg, var(--secondary-color), var(--shade-color));
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.match-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Match icon size and spacing */
+.match-icon {
+  text-align: center;
+  font-size: 4rem; /* Increased icon size for prominence */
+  margin-bottom: 1.5rem; /* Space between icon and text */
+}
+
+.match-details {
+  flex-grow: 1;
+}
+
+/* Match title */
+.match-details h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.match-details h3 a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.match-details h3 a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
+
+/* Match details (Time, Description, Status) */
+.time-range, .description, .status {
+  color: black;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.status .not-started {
+  color: #999;
+}
+
+.status .in-process {
+  color: #28a745;
+}
+
+.status .ended {
+  color: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .match-item {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .match-details h3 {
+    font-size: 1.2rem;
+  }
+}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="match-list">
+      {% for match in matches %}
+      <a href="{{ url_for('main.match_view', match_id=match.id) }}" class="match-item">
+          <div class="match-icon">
+              {% if match.hex_icon %}
+                  <span class="icon">{{ match.hex_icon }}</span>
+              {% endif %}
+          </div>
+          <div class="match-details">
+              <h3>{{ match.name }}</h3>
+
+              <div class="time-range">
+                  <strong>Start:</strong> {{ match.start_time }}<br>
+                  <strong>End:</strong> {{ match.end_time }}
+              </div>
+
+              <div class="description">
+                  {{ match.description }}
+              </div>
+
+              <div class="status">
+                 Status:
+                {% if match.status == 0 %}
+                    <span class="not-started">Scheduled</span>
+                {% elif match.status == 1 %}
+                    <span class="in-process">In Progress</span>
+                {% elif match.status == 2 %}
+                    <span class="ended">Completed</span>
+                 {% else %}
+                     <span class="unknown">Unknown Status</span>
+                 {% endif %}
+              </div>
+          </div>
+      </a>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}

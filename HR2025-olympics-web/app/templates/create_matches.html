@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block css_style %}
+    <style>
+        /* Form Styling */
+        form {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--input-border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: darkorange;
+        }
+
+        .btn-secondary {
+            background-color: #f4a261;
+            color: var(--primary-color);
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: darkorange;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Create Matches</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="participant_names">{{ form.participant_names.label }}</label>
+                {{ form.participant_names(class="form-control", placeholder="e.g., John Doe, Jane Smith, Alice Johnson") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+        <a href="/{{ key }}/management/matches/all/" class="btn btn-secondary">Back to Matches</a>
+    </div>
+{% endblock %}

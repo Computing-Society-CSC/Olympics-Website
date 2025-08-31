@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block css_style %}
+:root {
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --accent-color: #f4a261;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.status {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.winner {
+    color: green;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: darkorange;
+}
+
+form {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: darkorange;
+}
+
+/* Style for the Actions column */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.action-buttons a {
+    display: inline-block;
+    width: 70%;
+}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Management - Matches</h1>
+
+    <!-- Back to Management Dashboard Button -->
+    <div class="button-container">
+        <a href="{{ url_for('main.management_homepage', key=key) }}" class="button">Back to Management Dashboard</a>
+    </div>
+
+    {% if matches %}
+    <table>
+        <thead>
+            <tr>
+                <th>Match Name</th>
+                <th>Status</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Winner</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in matches %}
+            <tr>
+                <td>{{ match.name }}</td>
+                <td class="status">{{ match.status }}</td>
+                <td>{{ match.start_time }}</td>
+                <td>{{ match.end_time }}</td>
+                <td>
+                    {% if match.winner %}
+                        <span class="winner">{{ match.winner }}</span>
+                    {% else %}
+                        <span class="status">TBD</span>
+                    {% endif %}
+                </td>
+                <td class="action-buttons">
+                    <a href="{{ url_for('main.management_match_view', key=key, match_id=match.id) }}" class="button">View</a>
+                    <a href="{{ url_for('main.edit_match', key=key, match_id=match.id) }}" class="button">Edit Match Info</a>
+                    <a href="{{ url_for('main.create_matches', key=key, match_info_id=match.id) }}" class="button">Create Matches</a>
+                    <a href="{{ url_for('main.management_view_game_matches', key=key, match_id=match.id) }}" class="button">Upload Score</a>
+                    <a href="{{ url_for('main.management_save_winner', key=key, match_id=match.id) }}" class="button">Upload Winner</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No matches found.</p>
+    {% endif %}
+
+    <!-- Match Initialization Form -->
+    <h2 style="text-align: center;">Upload New Matches</h2>
+    <form method="POST" action="{{ url_for('main.management_matches_all', key=key) }}">
+        {{ form.hidden_tag() }}
+        <label for="name">Match Name:</label>
+        {{ form.name }}
+        
+        <label for="start_time">Start Time:</label>
+        {{ form.start_time }}
+        
+        <label for="end_time">End Time:</label>
+        {{ form.end_time }}
+        
+        <label for="status">Status:</label>
+        {{ form.status }}
+        
+        <!-- New Category and Description Fields -->
+        <label for="category">Category:</label>
+        {{ form.category }}
+        
+        <label for="description">Description:</label>
+        {{ form.description }}
+        
+        <input type="submit" value="Initialize Match">
+    </form>
+</div>
+{% endblock %}

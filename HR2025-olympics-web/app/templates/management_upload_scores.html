@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Match Scores{% endblock %}
+
+{% block css_style %}
+<style>
+    /* Root Variables */
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #ffffff;
+        --accent-color: #f4a261;
+        --input-border-color: #ddd;
+        --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Body Styling */
+    body {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Container Styling */
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Form Styling */
+    form {
+        background-color: #f9f9f9;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: var(--box-shadow);
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: var(--primary-color);
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--input-border-color);
+        border-radius: 4px;
+        font-size: 1rem;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus, select:focus {
+        border-color: var(--accent-color);
+        outline: none;
+    }
+
+    /* Button Styling */
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+    }
+
+    .btn-primary:hover {
+        background-color: darkorange;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Upload Scores for Match: {{ match.id }}</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="score1">{{ form.score1.label }}</label>
+            {{ form.score1(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="score2">{{ form.score2.label }}</label>
+            {{ form.score2(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="winner">{{ form.winner.label }}</label>
+            {{ form.winner(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

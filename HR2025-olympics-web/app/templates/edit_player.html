@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Player</title>
+    <style>
+        /* Root Variables */
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #ffffff;
+            --accent-color: #f4a261;
+            --input-border-color: #ddd;
+        }
+
+        /* Body Styling */
+        body {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Heading Styling */
+        h1, h2 {
+            text-align: center;
+            padding: 20px;
+            color: var(--primary-color);
+        }
+
+        /* Container Styling */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Label Styling */
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        /* Input and Select Styling */
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid var(--input-border-color);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Submit Button Styling */
+        input[type="submit"], .btn {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        /* Submit Button Hover Effect */
+        input[type="submit"]:hover, .btn:hover {
+            background-color: darkorange;
+        }
+
+        /* Button Container Styling */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Danger Button Styling */
+        .danger-button {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        /* Danger Button Hover Effect */
+        .danger-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center; margin: 20px;">
+        <a href="/{{ key }}/management/" class="btn btn-secondary">Back to Management Dashboard</a>
+    </div>
+    <div class="container mt-5">
+        <!-- Page Heading -->
+        <h2>Edit Player: {{ player.name }}</h2>
+
+        <!-- Form Section -->
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="name">{{ form.name.label }}</label>
+                {{ form.name(class="form-control") }}
+            </div>
+
+            <!-- Medals Field -->
+            <div class="form-group">
+                <label for="medals">{{ form.medals.label }}</label>
+                {{ form.medals(class="form-control") }}
+            </div>
+
+            <!-- House 1 Field -->
+            <div class="form-group">
+                <label for="house1">{{ form.house1.label }}</label>
+                {{ form.house1(class="form-control") }}
+            </div>
+
+            <!-- House 2 Field -->
+            <div class="form-group">
+                <label for="house2">{{ form.house2.label }}</label>
+                {{ form.house2(class="form-control") }}
+            </div>
+
+            <!-- Form Buttons -->
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Update Player</button>
+                <a href="/{{ key }}/management/players/" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

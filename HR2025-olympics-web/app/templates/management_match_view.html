@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Management - Match Details{% endblock %}
+
+{% block css_style %}
+<style>
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #ffffff;
+        --accent-color: #f4a261;
+    }
+    body {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        text-align: center;
+        padding: 20px;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: var(--accent-color);
+        color: var(--secondary-color);
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .status {
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+    .winner {
+        color: green;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .button {
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px;
+        border-radius: 5px;
+    }
+    .button:hover {
+        background-color: darkorange;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Management - Match Details</h1>
+    <div style="text-align: center; margin: 20px;">
+        <a href="/{{ key }}/management/" class="button">Back to Management Dashboard</a>
+    </div>
+    <h2>Match: {{ match_info.name }}</h2>
+    <p><strong>Start Time:</strong> {{ match_info.start_time }}</p>
+    <p><strong>End Time:</strong> {{ match_info.end_time }}</p>
+
+    <h3>Manual Rankings</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in manual_3places %}
+                <tr>
+                    <td>{{ loop.index }}</td>  
+                    <td>{{ player.name if player else 'TBD' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Round Matches</h3>
+    {% for round_details in match_details %}
+        <h4>Round {{ loop.index }}</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Match ID</th>
+                    <th>Player 1</th>
+                    <th>Player 2</th>
+                    <th>Score</th>
+                    <th>Winner</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for match in round_details %}
+                    <tr>
+                        <td>{{ match.match_id }}</td>
+                        <td>{{ match.player1 }}</td>
+                        <td>{{ match.player2 }}</td>
+                        <td>{{ match.score1 }} - {{ match.score2 }}</td>
+                        <td class="winner">{{ match.winner }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+    <div class="button-container">
+        <a href="{{ url_for('main.management_matches_all', key=key) }}" class="button">Back to All Matches</a>
+    </div>
+</div>
+{% endblock %}

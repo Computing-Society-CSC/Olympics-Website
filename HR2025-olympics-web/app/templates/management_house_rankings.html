@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block css_style %}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #f4a261;
+        color: black;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    form {
+        display: inline-block;
+    }
+    input {
+        width: 60px;
+        text-align: center;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .button {
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px;
+        border-radius: 5px;
+    }
+    
+    .button:hover {
+        background-color: darkorange;
+    }
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <!-- Back to Management Dashboard Button -->
+        <div style="text-align: center; margin-bottom: 20px;">
+            <a href="{{ url_for('main.management_homepage', key=key) }}" 
+               style="display: inline-block; 
+                      padding: 12px 24px; 
+                      background-color: #f4a261; 
+                      color: #000000; 
+                      text-decoration: none; 
+                      font-size: 16px; 
+                      border-radius: 5px; 
+                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+                      transition: background-color 0.3s ease, transform 0.2s ease;">
+                Back to Management Dashboard
+            </a>
+        </div>
+
+        <!-- Page Heading -->
+        <h1>Manage House Rankings</h1>
+
+        <!-- House Rankings Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>House Name</th>
+                    <th>Color</th>
+                    <th>Points</th>
+                    <th>Update Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for house in houses %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ house.name }}</td>
+                    <td style="background-color: {{ house.color }}; color: white;">{{ house.color }}</td>
+                    <td>{{ house.points }}</td>
+                    <td>
+                        <form method="POST">
+                            {{ forms[house.id].hidden_tag() }}
+                            <input type="hidden" name="house_id" value="{{ house.id }}">
+                            {{ forms[house.id].points }}
+                            <button type="submit" class="button">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
